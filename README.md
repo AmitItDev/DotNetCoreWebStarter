@@ -45,4 +45,4 @@ Open `appsettings.json` or `appsettings.Development.json` located in the `DotNet
 To apply the migrations and create the SQL Server database using Entity Framework Core, open a terminal or command prompt at the solution root and run the following command:
 
 ```bash
-dotnet ef database update -p DotNetCoreWebStarter.Data -s DotNetCoreWebStarter
+dotnet ef database update -p DotNetCoreWebStarter.Data -s DotNetCoreWebStarter.Web
