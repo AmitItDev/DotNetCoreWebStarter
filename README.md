@@ -46,3 +46,27 @@ To apply the migrations and create the SQL Server database using Entity Framewor
 
 ```bash
 dotnet ef database update -p DotNetCoreWebStarter.Data -s DotNetCoreWebStarter.Web
+
+## 🧾 Seed Default Data (Users, Roles, Menu Items)
+
+Once your database is created, you can optionally run the provided SQL script to insert default data including roles, menu items, and a sample admin user.
+
+### 📌 Script: `DefaultUsers_Roles_MenuItems.sql`
+
+1. Open **SQL Server Management Studio (SSMS)**
+2. Connect to your SQL Server instance
+3. Open the file: `DefaultUsers_Roles_MenuItems.sql`
+4. Run the script against the `DotNetCoreWebStarterDb` database (or the name you used in your connection string)
+
+This script will insert:
+
+- Default **roles**
+- Default **menu items**
+- A sample **Admin** user
+
+### 🔐 Default Admin Credentials
+
+```text
+Username: admin
+Password: Admin@123
+
