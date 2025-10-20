@@ -1,0 +1,232 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{24F0FF88-AA91-4E78-ACB7-8B5C6765488D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SysproConnector</RootNamespace>
+    <AssemblyName>SysproConnector</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net40\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SYSPROWCFServicesClientLibrary40, Version=7.0.0.4, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Binaries\SYSPROWCFServicesClientLibrary40.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DataProviders\SqlClient.cs" />
+    <Compile Include="DataProviders\SqlDataProvider.cs" />
+    <Compile Include="Infrastructure\DynamicSessionStorage.cs" />
+    <Compile Include="Infrastructure\Helpers\ExceptionHelper.cs" />
+    <Compile Include="Infrastructure\Helpers\ChronoNumberGenerator.cs" />
+    <Compile Include="Infrastructure\Helpers\Logger.cs" />
+    <Compile Include="Infrastructure\Helpers\StringHelper.cs" />
+    <Compile Include="Infrastructure\Helpers\XMLHelpers.cs" />
+    <Compile Include="Infrastructure\Messages\AuthenticationMessages.cs" />
+    <Compile Include="Infrastructure\Messages\CrmAccountMessages.cs" />
+    <Compile Include="Infrastructure\Messages\DebtorMessages.cs" />
+    <Compile Include="Infrastructure\Messages\LabourMessages.cs" />
+    <Compile Include="Infrastructure\Options\ActionWorkflowOptions.cs" />
+    <Compile Include="Infrastructure\Options\CustomerOprtions.cs" />
+    <Compile Include="Infrastructure\Options\LineCommandOptions.cs" />
+    <Compile Include="Infrastructure\Options\NoteTypeOptions.cs" />
+    <Compile Include="Infrastructure\Options\OrderStatusOption.cs" />
+    <Compile Include="Infrastructure\Options\SalesOrderLineType.cs" />
+    <Compile Include="Infrastructure\Settings\SysproGeneralSettings.cs" />
+    <Compile Include="Infrastructure\Settings\UnappliedPaymentSettings.cs" />
+    <Compile Include="Infrastructure\SystemEnum.cs" />
+    <Compile Include="Managers\ProductionManager.cs" />
+    <Compile Include="Managers\AuthenticationManager.cs" />
+    <Compile Include="Managers\SysproManager.cs" />
+    <Compile Include="Models\InfrastructureModels\CreateOrderInputModel.cs" />
+    <Compile Include="Models\InfrastructureModels\PostCreditFromInvoice.cs" />
+    <Compile Include="Models\InfrastructureModels\ProcessOrderModel.cs" />
+    <Compile Include="Models\InfrastructureModels\SysoroBulkOrderModel.cs" />
+    <Compile Include="Models\InfrastructureModels\SysproCreditNoteModel.cs" />
+    <Compile Include="Models\InfrastructureModels\SysoriSCTModel.cs" />
+    <Compile Include="Models\InfrastructureModels\SysoroAdjustModel.cs" />
+    <Compile Include="Models\InfrastructureModels\SysproBinTransferModel.cs" />
+    <Compile Include="Models\InfrastructureModels\LogDataModel.cs" />
+    <Compile Include="Models\InfrastructureModels\SysproCycleCountModel.cs" />
+    <Compile Include="Models\InfrastructureModels\SysproGITModel.cs" />
+    <Compile Include="Models\InfrastructureModels\SysproOrderModel_Old.cs" />
+    <Compile Include="Models\InfrastructureModels\SysproSalesOrderDetailModel.cs" />
+    <Compile Include="Models\InfrastructureModels\SysproStockTakeModel.cs" />
+    <Compile Include="Models\JobModels\JobCollection.cs" />
+    <Compile Include="Models\JobModels\JobCustomFields.cs" />
+    <Compile Include="Models\JobModels\SysproJobCancel.cs" />
+    <Compile Include="Models\JobModels\SysproJobLabour.cs" />
+    <Compile Include="Models\JobModels\SysproJobMaterial.cs" />
+    <Compile Include="Models\JobModels\SysproJobQuote.cs" />
+    <Compile Include="Models\LoginModels\LoginInputModel.cs" />
+    <Compile Include="Models\LoginModels\LoginOutputModel.cs" />
+    <Compile Include="Models\InfrastructureModels\ResponseModel.cs" />
+    <Compile Include="Models\ProductionModels\SysproBatchLineModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="PublicWCF.cs" />
+    <Compile Include="Repositories\SysproActivityLoggerRepository.cs" />
+    <Compile Include="SysproObjectFactories\AdjustStockSysproFactory.cs" />
+    <Compile Include="SysproObjectFactories\ProductionSysproFactory.cs" />
+    <Compile Include="Web References\SysproQueryService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\SysproSetupService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\SysproTransactionService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\SysproUtilityService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="C:\Bizsoft\Source Code Repositories\Bizsoft\SysproConnector\SysproConnector\Web References\SysproQueryService\query.wsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\SysproQueryService\</RelPath>
+      <UpdateFromURL>C:\Bizsoft\Source Code Repositories\Bizsoft\SysproConnector\SysproConnector\Web References\SysproQueryService\query.wsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>SysproConnector_SysproQueryService_queryclass</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="C:\Bizsoft\Source Code Repositories\Bizsoft\SysproConnector\SysproConnector\Web References\SysproSetupService\setup.wsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\SysproSetupService\</RelPath>
+      <UpdateFromURL>C:\Bizsoft\Source Code Repositories\Bizsoft\SysproConnector\SysproConnector\Web References\SysproSetupService\setup.wsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>SysproConnector_SysproSetupService_setupclass</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="C:\Bizsoft\Source Code Repositories\Bizsoft\SysproConnector\SysproConnector\Web References\SysproTransactionService\transaction.wsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\SysproTransactionService\</RelPath>
+      <UpdateFromURL>C:\Bizsoft\Source Code Repositories\Bizsoft\SysproConnector\SysproConnector\Web References\SysproTransactionService\transaction.wsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>SysproConnector_SysproTransactionService_transactionclass</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="C:\Bizsoft\Source Code Repositories\Bizsoft\SysproConnector\SysproConnector\Web References\SysproUtilityService\Utilities.wsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\SysproUtilityService\</RelPath>
+      <UpdateFromURL>C:\Bizsoft\Source Code Repositories\Bizsoft\SysproConnector\SysproConnector\Web References\SysproUtilityService\Utilities.wsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>SysproConnector_SysproUtilityService_utilitiesclass</CachedSettingsPropName>
+    </WebReferenceUrl>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\SysproQueryService\query.wsdl" />
+    <None Include="Web References\SysproQueryService\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\SysproSetupService\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\SysproSetupService\setup.wsdl" />
+    <None Include="Web References\SysproTransactionService\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\SysproTransactionService\transaction.wsdl" />
+    <None Include="Web References\SysproUtilityService\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\SysproUtilityService\Utilities.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TevoStockUtilities.Infrastructure\TevoStockUtilities.Infrastructure.csproj">
+      <Project>{46c1a779-13a7-44aa-8192-50f720a79512}</Project>
+      <Name>TevoStockUtilities.Infrastructure</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Binaries\SYSPROWCFServicesClientLibrary40.dll" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,18 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="SysproConnector.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="SysproConnector_SysproQueryService_queryclass" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://win-bajri55dor7/sysprowebservices2.0/query.asmx</Value>
+    </Setting>
+    <Setting Name="SysproConnector_SysproSetupService_setupclass" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://win-bajri55dor7/sysprowebservices2.0/setup.asmx</Value>
+    </Setting>
+    <Setting Name="SysproConnector_SysproTransactionService_transactionclass" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://win-bajri55dor7/SysproWebservices2.0/transaction.asmx</Value>
+    </Setting>
+    <Setting Name="SysproConnector_SysproUtilityService_utilitiesclass" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://win-bajri55dor7/sysprowebservices2.0/Utilities.asmx</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

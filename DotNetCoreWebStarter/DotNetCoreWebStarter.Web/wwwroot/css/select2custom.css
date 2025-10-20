@@ -1,0 +1,54 @@
+/* Fix the height of select2 multi-select selection box */
+.select2-container--default .select2-selection--multiple {
+    max-height: 40px; /* fixed height */
+    overflow-y: auto; /* scroll vertical when selections overflow */
+    white-space: nowrap; /* keep tags in one line with horizontal scroll */
+}
+
+/* Prevent selected tags wrapping to new lines */
+.select2-selection__rendered {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto; /* horizontal scrollbar when tags overflow */
+}
+
+/* Optional: style scrollbars for better UX */
+.select2-selection--multiple::-webkit-scrollbar {
+    height: 6px;
+}
+
+.select2-selection--multiple::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.select2-selection--multiple::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 3px;
+}
+
+    .select2-selection--multiple::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }
+/* Smaller scrollbar for Select2 multiple selection box */
+.select2-container--default .select2-selection--multiple::-webkit-scrollbar {
+    height: 4px !important; /* smaller height */
+}
+
+.select2-container--default .select2-selection--multiple::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.select2-container--default .select2-selection--multiple::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 2px;
+}
+
+    .select2-container--default .select2-selection--multiple::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }
+
+/* Firefox scrollbar styling */
+.select2-container--default .select2-selection--multiple {
+    scrollbar-width: thin;
+    scrollbar-color: #888 #f1f1f1;
+}

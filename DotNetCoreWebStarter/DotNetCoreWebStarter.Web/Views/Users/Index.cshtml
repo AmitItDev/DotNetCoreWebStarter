@@ -1,0 +1,346 @@
+﻿@using DotNetCoreWebStarter.Common
+@using DotNetCoreWebStarter.Web.Constants
+@{
+    ViewData["Title"] = "Users List";
+    var roles = ViewBag.Roles as List<DotNetCoreWebStarter.Core.Entities.ApplicationRole>;
+    var statuses = ViewBag.Statuses as List<string>;
+}
+
+<link rel="stylesheet" href="/css/select2custom.css" />
+<link rel="stylesheet" href="/css/tabulatorcustom.css" />
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<link href="https://unpkg.com/tabulator-tables@5.5.0/dist/css/tabulator.min.css" rel="stylesheet" />
+
+<div class="shadow bg-white p-3">
+    <div class="flex items-center justify-between">
+        <!-- Left: Page Title -->
+        <h1 class="text-xl font-semibold text-gray-800">@ViewData["Title"]</h1>
+
+        <!-- Right: Breadcrumb -->
+        <p class="text-sm mt-1 text-right">
+            <a href="@Url.Action(Actions.Index, Controllers.Home)" class="text-gray-600 hover:underline">Home</a>
+            <span class="mx-1 text-gray-500">></span>
+            <span class="text-[#00aeef]">Users</span>
+        </p>
+    </div>
+</div>
+
+
+
+<div class="rounded-lg shadow bg-white p-4 space-y-6  m-4">
+
+    <!-- Filter Panel -->
+    <div class="flex flex-wrap items-end gap-4 justify-end">
+        <!-- Role Filter -->
+        <div class="flex flex-col">
+            <label for="roleFilter" class="text-sm font-medium text-gray-700 mb-1">Role</label>
+            <select id="roleFilter" multiple class="select2 w-48 rounded-md border-gray-300 focus:ring-blue-500 focus:border-blue-500 text-sm">
+                @foreach (var role in roles)
+                {
+                    <option value="@role.Name" selected>@role.Name</option>
+                }
+            </select>
+        </div>
+
+        <!-- Status Filter -->
+        <div class="flex flex-col">
+            <label for="statusFilter" class="text-sm font-medium text-gray-700 mb-1">Status</label>
+            <select id="statusFilter" multiple class="select2 w-48 rounded-md border-gray-300 focus:ring-blue-500 focus:border-blue-500 text-sm">
+                @foreach (var status in statuses)
+                {
+                    <option value="@status" selected>@status</option>
+                }
+            </select>
+        </div>
+
+        <!-- Search Box -->
+        <div class="flex flex-col flex-grow">
+            <label for="searchInput" class="text-sm font-medium text-gray-700 mb-1">Search</label>
+            <input id="searchInput" type="text" placeholder="Search users..." class="border-[0.1px] border-[slategrey] w-full rounded-md border-gray-300 focus:ring-blue-500 focus:border-blue-500 text-sm px-3 py-2" />
+        </div>
+
+        <!-- Search Button -->
+        <div class="flex space-x-2">
+            <button id="btnSearch" title="Search" class="inline-flex items-center gap-2 bg-[#00aeef] text-white px-4 py-2 rounded-md hover:bg-blue-700 text-sm">
+                <i class="fas fa-search"></i>
+                @* <span>Search</span> *@
+            </button>
+
+            <!-- Clear Filters Button -->
+            <button id="btnClearFilters" title="Clear filters" class="inline-flex items-center gap-2 bg-gray-100 text-gray-700 px-3 py-2 rounded-md hover:bg-gray-200 text-sm">
+                <i class="fas fa-sync"></i>
+            </button>
+
+
+            <button id="add-new" title="Add User" class="inline-flex items-center gap-2 bg-[#00aeef] text-white px-4 py-2 rounded-md hover:bg-blue-700 text-sm">
+                <i class="fas fa-user-plus"></i>
+            </button>
+        </div>
+
+    </div>
+
+    <!-- Table Container -->
+    <div id="usersTable" class="mt-4"></div>
+</div>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script src="https://unpkg.com/tabulator-tables@5.5.0/dist/js/tabulator.min.js"></script>
+<script src="/js/tabulator-helper.js" ></script>
+<script>
+    let table;
+
+    $(document).ready(function () {
+        $('#roleFilter').select2({
+            multiple: true,
+            width: 'resolve',
+            placeholder: 'Select roles',
+            closeOnSelect: false
+        });
+
+        $('#statusFilter').select2({
+            multiple: true,
+            width: 'resolve',
+            placeholder: 'Select status',
+            closeOnSelect: false
+        });
+        function formatActionsCell(cell) {
+            return `
+                <div class="flex space-x-2 justify-center">
+                    <button class="btn-edit bg-[#00aeef] hover:bg-blue-600 text-white px-2 py-1 rounded text-xs transition" title="Edit">
+                        <i class="fas fa-edit"></i>
+                    </button>
+                    <button class="btn-delete bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded text-xs transition" title="Delete">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                </div>`;
+        }
+
+        function handleActionsClick(e, cell) {
+            const rowData = cell.getData();
+
+            if ($(e.target).closest('.btn-edit').length) {
+                onEditUser(rowData);
+            } else if ($(e.target).closest('.btn-delete').length) {
+                onDeleteUser(rowData, cell.getTable());
+            }
+        }
+
+        function onEditUser(user) {
+              var userId = user.userId;
+              // Razor generates the URL with a placeholder
+              var urlTemplate = '@Url.Action(Actions.Manage, Controllers.Users, new { id = "__USERID__" })';
+              
+              // Replace the placeholder with the actual userId
+              var finalUrl = urlTemplate.replace("__USERID__", userId);
+              
+              // Redirect to the final URL
+              window.location.href = finalUrl;
+        }
+
+
+         
+
+        function onDeleteUser(user, table) {
+            var deleteText = `@Messages.DeleteConfirn`;
+            var personalizedText = deleteText.replace("this?", `"${user.userName}"?`);
+            swal({
+                title:  "@Messages.ConfirmTitle",
+                text: personalizedText,
+                type: '@SystemEnum.MessageType.warning.ToString()',
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Yes, delete it!",
+                closeOnConfirm: false
+            }).then((result) => {
+                if (result.value) {
+                    const deleteUrl = '@Url.Action(Actions.Delete, Controllers.Users)';
+                    console.log( user.userId);
+                    fetch(deleteUrl, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body:  user.userId
+                    })
+                    .then(res => res.json())
+                    .then(result => {
+                        if (result.success) {
+                              ShowMessage('@SystemEnum.MessageType.success.ToString()', result.message);
+                            table.replaceData();
+                        } else {
+                            alert(result.message);
+                        }
+                    })
+                    .catch(err => {
+                        console.error(err);
+                        alert("An unexpected error occurred while deleting the user.");
+                    });
+                }
+            });
+        }
+
+
+       // function loadTable() {
+       //      table = new Tabulator("#usersTable", {
+       //          layout: "fitColumns",
+       //          autoResize: true,
+       //          responsiveLayout: true,
+       //          tooltips: true,
+       //          headerSort: false,
+       //          pagination: true,
+       //          paginationMode: "remote",
+       //          paginationSize: 10,
+       //          paginationSizeSelector: [10, 25, 50, 100],
+       //          movableColumns: true,
+       //          resizableRows: false,
+       //          placeholder: "No users found.",
+       //          height: "auto",
+       //          rowFormatter: function (row) {
+       //              const el = row.getElement();
+       //              el.classList.add("transition", "duration-200", "hover:bg-blue-50", "text-sm");
+       //              if (row.getPosition() % 2 === 1) {
+       //                  el.classList.add("bg-gray-50");
+       //              } else {
+       //                  el.classList.remove("bg-gray-50");
+       //              }
+       //              },
+       //              dataReceiveParams: {
+       //                  last_page: "last_page",
+       //                  data: "data",
+       //                  total_count: "total_count"
+       //              },
+       //          columns: [
+       //              {
+       //                  title: "Actions",
+       //                  formatter: formatActionsCell,
+       //                  width: 100,
+       //                  hozAlign: "center",
+       //                  cellClick:handleActionsClick
+       //              },
+       //              { title: "Username", field: "userName",  headerFilter:"input",sorter: "string" },
+       //              { title: "Email", field: "email", },
+       //              {
+       //                  title: "Status",
+       //                  field: "status",
+       //                  formatter: function (cell) {
+       //                      const status = cell.getValue();
+       //                      const color = status === "Active" ? "bg-[#00aeef] text-white" : "bg-gray-300 text-gray-800";
+       //                      return `<span class="px-2 py-1 text-xs rounded-full font-semibold ${color}">${status}</span>`;
+       //                  }
+       //              }
+       //          ],
+       //          ajaxURL: '@Url.Action(Actions.GetUsers, Controllers.Users)',
+       //          // filterMode:"remote",
+       //          sortMode:"remote",
+       //          ajaxConfig: "POST",
+       //          ajaxContentType: "application/json",
+       //          ajaxRequestFunc: function (url, config, params) {
+       //             console.log(params);
+       //              const filter = {
+       //                  Page: params.page,
+       //                  PageSize: params.size,
+       //                  Search: document.getElementById("searchInput").value,
+       //                  Roles: Array.from(document.getElementById("roleFilter").selectedOptions).map(o => o.value),
+       //                  Status: Array.from(document.getElementById("statusFilter").selectedOptions).map(o => o.value),
+       //                  sortField:  params.sort.length ? params.sort[0].field : "Username",
+       //                  sortDir:    params.sort.length ? params.sort[0].dir   : "asc",
+       //              };
+       //              return fetch(url, {
+       //                  method: "POST",
+       //                  headers: { "Content-Type": "application/json" },
+       //                  body: JSON.stringify(filter)
+       //              }).then(resp => resp.json());
+       //          }
+       //      });
+       // }
+
+          function loadTable() {
+                const columns = [
+                    {
+                        title: "Actions",
+                        formatter: formatActionsCell,
+                        width: 100,
+                        hozAlign: "center",
+                        cellClick: handleActionsClick
+                    },
+                    { title: "Username", field: "userName", headerFilter: "input", sorter: "string" },
+                    { title: "Email", field: "email" },
+                    {
+                        title: "Status",
+                        field: "status",
+                        formatter: TabulatorHelper.formatStatus
+                    },
+                    {
+                        title: "Last Login",
+                        field: "lastLogin",
+                        formatter: TabulatorHelper.formatDate
+                    },
+                    {
+                        title: "Hourly Rate",
+                        field: "hourlyRate",
+                        formatter: TabulatorHelper.formatCurrency
+                    }
+                ];
+
+                table = TabulatorHelper.initTable("#usersTable", columns, {
+                    ajaxURL: '@Url.Action(Actions.GetUsers, Controllers.Users)',
+                    sortMode: "remote",
+                    ajaxConfig: "POST",
+                    ajaxContentType: "application/json",
+                    dataReceiveParams: {
+                        last_page: "last_page",
+                        data: "data",
+                        total_count: "total_count"
+                    },
+                    ajaxRequestFunc: function (url, config, params) {
+                        console.log(params);
+                        const filter = {
+                            Page: params.page,
+                            PageSize: params.size,
+                            Search: document.getElementById("searchInput").value,
+                            Roles: Array.from(document.getElementById("roleFilter").selectedOptions).map(o => o.value),
+                            Status: Array.from(document.getElementById("statusFilter").selectedOptions).map(o => o.value),
+                            sortField: params.sort.length ? params.sort[0].field : "Username",
+                            sortDir: params.sort.length ? params.sort[0].dir : "asc",
+                        };
+                        return fetch(url, {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify(filter)
+                        }).then(resp => resp.json());
+                    }
+                });
+           }
+
+
+
+        loadTable();
+
+        // $('#roleFilter, #statusFilter').on('change', () => {
+        //     table.setData();
+        // });
+
+        $('#btnSearch').on('click', () => {
+            table.setData();
+        });
+
+        $('#btnClearFilters').on('click', () => {
+            $('#roleFilter').val(null).trigger('change');
+            $('#statusFilter').val(null).trigger('change');
+            $('#searchInput').val('');
+            table.setData();
+        });
+
+        $('#searchInput').on('keydown', e => {
+            if (e.key === 'Enter') {
+                table.setData();
+            }
+        });
+
+        $('#add-new').click(()=> {
+           window.location.href =`@Url.Action(Actions.Manage, Controllers.Users)`;
+        });
+    });
+</script>

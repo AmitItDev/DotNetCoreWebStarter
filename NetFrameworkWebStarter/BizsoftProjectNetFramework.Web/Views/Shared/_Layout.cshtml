@@ -1,0 +1,281 @@
+﻿@using BizsoftProjectNetFramework.Web.Class;
+@using BizsoftProjectNetFramework.Infrastructure;
+@using System.Web.Optimization;
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <link rel="icon" type="image/png" sizes="16x16" href="~/assets/images/favicon.ico">
+
+    <title>@ViewBag.Title - Bizsoft</title>
+    <link href="~/assets/node_modules/toast-master/css/jquery.toast.css" rel="stylesheet">
+    @(Styles.Render("~/Content/cssTheme"))
+    <!-- Custom CSS -->
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+
+    @Scripts.Render("~/bundles/jsTheme")
+
+    <script src="~/assets/node_modules/toast-master/js/jquery.toast.js"></script>
+    <script src="~/Scripts/common.js"></script>
+</head>
+<body class="skin-blue fixed-layout">
+    <!-- ============================================================== -->
+    <!-- Preloader - style you can find in spinners.css -->
+    <!-- ============================================================== -->
+    <div class="preloader">
+        <div class="loader">
+            <div class="loader__figure"></div>
+            <p class="loader__label">Bizsoft</p>
+        </div>
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- Main wrapper - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+    <div id="main-wrapper">
+        <!-- ============================================================== -->
+        <!-- Topbar header - style you can find in pages.scss -->
+        <!-- ============================================================== -->
+        <header class="topbar">
+            <nav class="navbar top-navbar navbar-expand-md navbar-dark">
+                <!-- ============================================================== -->
+                <!-- Logo -->
+                <!-- ============================================================== -->
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="@Url.Action(Actions.Index, Controllers.Home, new { Area = BizsoftProjectNetFramework.Web.Class.Areas.NoArea })">
+
+
+                        <!--End Logo icon -->
+                        <!-- Logo text --><span style="font-size:x-large; font-weight:bold;padding-left:5px;">
+    <!-- dark Logo text -->
+    Bizsoft @(System.Configuration.ConfigurationManager.AppSettings["TestSiteTitle"])
+    @*<img src="~/assets/images/New-logo-text.png" height="25" width="135" alt="homepage" class="dark-logo" />*@
+    <!-- Light Logo text -->
+    @*<img src="~/assets/images/New-logo-text.png" height="25" width="135" class="light-logo" alt="homepage" />*@
+</span>
+                        @*}*@
+                    </a>
+                </div>
+                <!-- ============================================================== -->
+                <!-- End Logo -->
+                <!-- ============================================================== -->
+                <div class="navbar-collapse">
+                    <!-- ============================================================== -->
+                    <!-- toggle and nav items -->
+                    <!-- ============================================================== -->
+                    <ul class="navbar-nav mr-auto">
+                        <!-- This is  -->
+                        <li class="nav-item"> <a class="nav-link nav-toggler d-block d-md-none waves-effect waves-dark" href="javascript:void(0)"><i class="ti-menu"></i></a></li>
+                        <li class="nav-item"> <a class="nav-link sidebartoggler d-none d-lg-block d-md-block waves-effect waves-dark" href="javascript:void(0)"><i class="icon-menu"></i></a> </li>
+                        <li class="nav-item"><a class="nav-link sidebartoggler d-none d-lg-block d-md-block waves-effect waves-dark"></a></li>
+
+                    </ul>
+                    <!-- ============================================================== -->
+                    <!-- User profile and search -->
+                    <!-- ============================================================== -->
+                    <ul class="navbar-nav my-lg-0">
+                        <!-- ============================================================== -->
+                        <!-- User Profile -->
+                        <!-- ============================================================== -->
+                        <li class="nav-item dropdown u-pro">
+                            <a class="nav-link dropdown-toggle waves-effect waves-dark profile-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="hidden-md-down">
+                                    @(ProjectSession.UserName) &nbsp;<i class="fa fa-angle-down"></i>
+                                </span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right animated flipInY">
+                                <a href='@Url.Action(Actions.Logout, Controllers.Account ,  new { Area = "" })' class="dropdown-item"><i class="fa fa-power-off"></i> Logout</a>
+                            </div>
+                        </li>
+                        <!-- ============================================================== -->
+                        <!-- End User Profile -->
+                        <!-- ============================================================== -->
+                        <li class="nav-item right-side-toggle"> <a class="nav-link  waves-effect waves-light" href='@Url.Action(Actions.Logout, Controllers.Account , new { Area = "" })'><i class="fa fa-power-off"></i></a></li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <!-- ============================================================== -->
+        <!-- End Topbar header -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+        <aside class="left-sidebar">
+            <!-- Sidebar scroll-->
+            <div class="scroll-sidebar">
+                <!-- Sidebar navigation-->
+                <nav class="sidebar-nav">
+                    <ul id="sidebarnav">
+                        <li class="user-pro">
+                            <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="ti-user"></i><span class="hide-menu">@( ProjectSession.FullName)</span></a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li><a href='@Url.Action(Actions.Logout, Controllers.Account ,  new { Area = "" })'><i class="fa fa-power-off"></i> Logout</a></li>
+                            </ul>
+                        </li>
+
+                        @if (ProjectSession.UserTypeId == (int)SystemEnum.UserType.Admin)
+                        {
+                            <li>
+                                <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="ti-id-badge"></i><span class="hide-menu">Admin</span></a>
+                                <ul aria-expanded="false" class="collapse">
+                                    <li> <a href="@Url.Action(Actions.Index, Controllers.Users)">Users</a></li>
+                                </ul>
+                            </li>
+                        }
+                    </ul>
+                </nav>
+                <!-- End Sidebar navigation -->
+            </div>
+            <!-- End Sidebar scroll-->
+        </aside>
+        <!-- ============================================================== -->
+        <!-- End Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Page wrapper  -->
+        <!-- ============================================================== -->
+        <div class="page-wrapper">
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+            <div class="container-fluid">
+                @RenderBody()
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Container fluid  -->
+            <!-- ============================================================== -->
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Page wrapper  -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- footer -->
+        <!-- ============================================================== -->
+        <footer class="footer">
+            © @DateTime.Now.Year
+        </footer>
+        <!-- ============================================================== -->
+        <!-- End footer -->
+        <!-- ============================================================== -->
+        @*@{
+                Html.RenderPartial(Views.CommonSearchPartial);
+            }*@
+    </div>
+
+
+
+    @if (ViewBag.Message != null)
+    {
+        <script>
+            ShowMessage('@ViewBag.Message[0]', '@ViewBag.Message[1]');
+        </script>
+    }
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <script>
+            ShowMessage('@SystemEnum.MessageType.success.ToString()', '@(TempData["SuccessMessage"].ToString())');
+        </script>
+    }
+    @if (TempData["WarningMessage"] != null)
+    {
+        <script>
+            ShowMessage('@SystemEnum.MessageType.warning.ToString()', '@(TempData["WarningMessage"].ToString())');
+        </script>
+    }
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <script>
+            ShowMessage('@SystemEnum.MessageType.error.ToString()', '@(TempData["ErrorMessage"].ToString())');
+        </script>
+    }
+    @RenderSection("scripts", required: false)
+
+    <!-- ============================================================== -->
+    <!-- Bind every modal popup in this div  -->
+    <!-- ============================================================== -->
+    <div class="modal" id="modal-container" data-backdrop="static" tabindex="-1" role="dialog">
+        <!-- Bind modal -->
+    </div>
+
+    <script type="text/javascript">
+        $(function () {
+            $(".preloader").fadeOut();
+
+            $("input[class*='txtAmount']").keydown(function (event) {
+                if (event.shiftKey == true) {
+                    event.preventDefault();
+                }
+
+                if ((event.keyCode >= 48 && event.keyCode <= 57) || (event.keyCode >= 96 && event.keyCode <= 105) || event.keyCode == 8 || event.keyCode == 9 || event.keyCode == 37 || event.keyCode == 39 || event.keyCode == 46 || event.keyCode == 190 || event.keyCode == 110) {
+
+                } else {
+                    event.preventDefault();
+                }
+
+                if ($(this).val().indexOf('.') !== -1 && event.keyCode == 190)
+                    event.preventDefault();
+            });
+
+            // new event
+            $(document).on("keypress keyup blur", "input[class*='allownumericwithdecimal']", function (event) {
+                $(this).val($(this).val().replace(/[^0-9\.]/g, ''));
+                if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+                    event.preventDefault();
+                }
+            });
+
+            // new event
+            $(document).on("keypress keyup blur", "input[class*='allownumericwithoutdecimal']", function (event) {
+                $(this).val($(this).val().replace(/[^\d].+/, ""));
+                if ((event.which < 48 || event.which > 57)) {
+                    event.preventDefault();
+                }
+            });
+
+        });
+
+        ! function (window, document, $) {
+            "use strict";
+            $("input,select,textarea").not("[type=submit]").jqBootstrapValidation();
+        }(window, document, jQuery);
+
+
+        function isRealDate(value) {
+            const date = new Date(value);
+            return date instanceof Date && !isNaN(date);
+        }
+
+        function isInvalidDate(dateStr) {
+            if (!dateStr) return true; // null, undefined, or empty
+
+            const normalized = dateStr.trim().toLowerCase();
+
+            return (
+                normalized === "0001/01/01 00:00:00" ||
+                normalized === "1/1/0001 12:00:00 am" ||
+                normalized === "0001-01-01t00:00:00" || // ISO format
+                normalized === "01/01/0001" ||
+                normalized === "0001-01-01" ||
+                normalized === "1/1/0001" ||
+                normalized === "0001-1-1" ||
+                normalized === "01-01-0001"
+            );
+        }
+    </script>
+</body>
+</html>

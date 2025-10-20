@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.syspro.com/ns/utilities/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://www.syspro.com/ns/utilities/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://www.syspro.com/ns/utilities/">
+      <s:element name="Logon">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Operator" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="OperatorPassword" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CompanyId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CompanyPassword" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="LanguageCode" type="tns:Language" />
+            <s:element minOccurs="1" maxOccurs="1" name="LogLevel" type="tns:LogDetail" />
+            <s:element minOccurs="1" maxOccurs="1" name="EncoreInstance" type="tns:Instance" />
+            <s:element minOccurs="0" maxOccurs="1" name="XmlIn" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:simpleType name="Language">
+        <s:restriction base="s:string">
+          <s:enumeration value="AUTO" />
+          <s:enumeration value="ENGLISH_US" />
+          <s:enumeration value="FRENCH_CANADIAN" />
+          <s:enumeration value="DANISH" />
+          <s:enumeration value="DUTCH" />
+          <s:enumeration value="ENGLISH" />
+          <s:enumeration value="FINNISH" />
+          <s:enumeration value="FRENCH" />
+          <s:enumeration value="GERMAN" />
+          <s:enumeration value="ITALIAN" />
+          <s:enumeration value="NORWEGIAN" />
+          <s:enumeration value="PORTUGUESE" />
+          <s:enumeration value="SPANISH" />
+          <s:enumeration value="SWEDISH" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="LogDetail">
+        <s:restriction base="s:string">
+          <s:enumeration value="ldNoDebug" />
+          <s:enumeration value="ldDebug" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="Instance">
+        <s:restriction base="s:string">
+          <s:enumeration value="EncoreInstance_0" />
+          <s:enumeration value="EncoreInstance_1" />
+          <s:enumeration value="EncoreInstance_2" />
+          <s:enumeration value="EncoreInstance_3" />
+          <s:enumeration value="EncoreInstance_4" />
+          <s:enumeration value="EncoreInstance_5" />
+          <s:enumeration value="EncoreInstance_6" />
+          <s:enumeration value="EncoreInstance_7" />
+          <s:enumeration value="EncoreInstance_8" />
+          <s:enumeration value="EncoreInstance_9" />
+          <s:enumeration value="EncoreInstanceTostring_10" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="LogonResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LogonResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Logoff">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UserId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LogoffResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LogoffResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetLogonProfile">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UserId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetLogonProfileResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetLogonProfileResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Run">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UserId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="BusinessObject" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Parameter" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RunResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RunResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="LogonSoapIn">
+    <wsdl:part name="parameters" element="tns:Logon" />
+  </wsdl:message>
+  <wsdl:message name="LogonSoapOut">
+    <wsdl:part name="parameters" element="tns:LogonResponse" />
+  </wsdl:message>
+  <wsdl:message name="LogoffSoapIn">
+    <wsdl:part name="parameters" element="tns:Logoff" />
+  </wsdl:message>
+  <wsdl:message name="LogoffSoapOut">
+    <wsdl:part name="parameters" element="tns:LogoffResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetLogonProfileSoapIn">
+    <wsdl:part name="parameters" element="tns:GetLogonProfile" />
+  </wsdl:message>
+  <wsdl:message name="GetLogonProfileSoapOut">
+    <wsdl:part name="parameters" element="tns:GetLogonProfileResponse" />
+  </wsdl:message>
+  <wsdl:message name="RunSoapIn">
+    <wsdl:part name="parameters" element="tns:Run" />
+  </wsdl:message>
+  <wsdl:message name="RunSoapOut">
+    <wsdl:part name="parameters" element="tns:RunResponse" />
+  </wsdl:message>
+  <wsdl:portType name="utilitiesclassSoap">
+    <wsdl:operation name="Logon">
+      <wsdl:input message="tns:LogonSoapIn" />
+      <wsdl:output message="tns:LogonSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Logoff">
+      <wsdl:input message="tns:LogoffSoapIn" />
+      <wsdl:output message="tns:LogoffSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetLogonProfile">
+      <wsdl:input message="tns:GetLogonProfileSoapIn" />
+      <wsdl:output message="tns:GetLogonProfileSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Run">
+      <wsdl:input message="tns:RunSoapIn" />
+      <wsdl:output message="tns:RunSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="utilitiesclassSoap" type="tns:utilitiesclassSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Logon">
+      <soap:operation soapAction="http://www.syspro.com/ns/utilities/Logon" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Logoff">
+      <soap:operation soapAction="http://www.syspro.com/ns/utilities/Logoff" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLogonProfile">
+      <soap:operation soapAction="http://www.syspro.com/ns/utilities/GetLogonProfile" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Run">
+      <soap:operation soapAction="http://www.syspro.com/ns/utilities/Run" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="utilitiesclassSoap12" type="tns:utilitiesclassSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Logon">
+      <soap12:operation soapAction="http://www.syspro.com/ns/utilities/Logon" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Logoff">
+      <soap12:operation soapAction="http://www.syspro.com/ns/utilities/Logoff" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLogonProfile">
+      <soap12:operation soapAction="http://www.syspro.com/ns/utilities/GetLogonProfile" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Run">
+      <soap12:operation soapAction="http://www.syspro.com/ns/utilities/Run" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="utilitiesclass">
+    <wsdl:port name="utilitiesclassSoap" binding="tns:utilitiesclassSoap">
+      <soap:address location="http://win-bajri55dor7/sysprowebservices2.0/Utilities.asmx" />
+    </wsdl:port>
+    <wsdl:port name="utilitiesclassSoap12" binding="tns:utilitiesclassSoap12">
+      <soap12:address location="http://win-bajri55dor7/sysprowebservices2.0/Utilities.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

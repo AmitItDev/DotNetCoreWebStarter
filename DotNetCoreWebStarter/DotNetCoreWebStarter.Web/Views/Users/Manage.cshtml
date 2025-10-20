@@ -1,0 +1,90 @@
+﻿@using DotNetCoreWebStarter.Web.Constants
+@model DotNetCoreWebStarter.Core.Models.Users.UserManageViewModel
+@{
+    ViewData["Title"] = Model.UserId.HasValue ? "Edit User" : "Add User";
+}
+<div class="shadow bg-white p-3">
+    <div class="flex items-center justify-between">
+        <!-- Left: Page Title -->
+        <h1 class="text-xl font-semibold text-gray-800">@ViewData["Title"]</h1>
+
+        <!-- Right: Breadcrumb -->
+        <p class="text-sm text-right text-gray-600">
+            <a href="@Url.Action(Actions.Index, Controllers.Home)" class="text-gray-400 hover:underline">Home</a>
+            <span class="mx-1 text-gray-400">></span>
+            <a href="@Url.Action(Actions.Index, Controllers.Users)" class="text-gray-400 hover:underline">Users</a>
+            <span class="mx-1 text-gray-400">></span>
+            <span class="text-[#00aeef]">Manage</span>
+        </p>
+    </div>
+</div>
+
+
+<div class="bg-white shadow-md rounded p-4 m-4">
+    <form asp-action="Manage" method="post">
+        <input type="hidden" asp-for="UserId" />
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Left Side -->
+            <div>
+                <div class="mb-4">
+                    <label asp-for="Name" class="block font-medium mb-1"></label>
+                    <input asp-for="Name" class="w-full border rounded p-2" />
+                    <span asp-validation-for="Name" class="text-red-500 text-sm"></span>
+                </div>
+
+                <div class="mb-4">
+                    <label asp-for="UserName" class="block font-medium mb-1"></label>
+                    <input asp-for="UserName" class="w-full border rounded p-2" />
+                    <span asp-validation-for="UserName" class="text-red-500 text-sm"></span>
+                </div>
+
+                <div class="mb-4">
+                    <label asp-for="Email" class="block font-medium mb-1"></label>
+                    <input asp-for="Email" class="w-full border rounded p-2" />
+                    <span asp-validation-for="Email" class="text-red-500 text-sm"></span>
+                </div>
+            </div>
+
+            <!-- Right Side -->
+            <div>
+                <div class="mb-4">
+                    <label asp-for="Password" class="block font-medium mb-1"> Password <small class="text-gray-500">(Leave blank to keep existing password.)</small></label>
+                  
+                    <input asp-for="Password" class="w-full border rounded p-2" type="password" />
+                </div>
+
+                <div class="mb-4">
+                    <label asp-for="RoleId" class="block font-medium mb-1"></label>
+                    <select asp-for="RoleId" asp-items="@(new SelectList(Model.AvailableRoles, "Id", "Name"))"
+                            class="w-full border rounded p-2"></select>
+                </div>
+            </div>
+        </div>
+
+        <!-- General Error Message -->
+        @if (ViewData.ModelState["General"] != null && ViewData.ModelState["General"].Errors.Count > 0)
+        {
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative text-sm mt-4">
+                @foreach (var error in ViewData.ModelState["General"].Errors)
+                {
+                    <p>@error.ErrorMessage</p>
+                }
+            </div>
+        }
+
+        <!-- Buttons -->
+        <div class="flex justify-end space-x-3 mt-6">
+            <a asp-action="Index" class="px-4 py-2 bg-gray-300 rounded">Cancel</a>
+            <button type="submit" class="px-4 py-2 bg-[#00aeef] text-white rounded hover:bg-blue-700">
+                Save
+            </button>
+        </div>
+    </form>
+</div>
+
+
+@* @section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+ *@

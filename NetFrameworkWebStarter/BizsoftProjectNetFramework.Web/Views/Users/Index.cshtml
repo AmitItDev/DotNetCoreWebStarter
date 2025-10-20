@@ -1,0 +1,177 @@
+﻿@using BizsoftProjectNetFramework.Infrastructure;
+@using BizsoftProjectNetFramework.Web.Class;
+@using System.Web.Optimization;
+
+@{
+    ViewBag.Title = "Users";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@(Styles.Render("~/Content/cssDataTableTheme"))
+<style>
+    .dataTables_length {
+        margin-right: 10px;
+    }
+
+    table.table thead .sorting,
+    table.table thead .sorting_asc,
+    table.table thead .sorting_desc {
+        background: none !important;
+    }
+</style>
+
+<div class="row page-titles">
+    @Html.AntiForgeryToken()
+    <div class="col-md-5 align-self-center">
+        <h4 class="text-themecolor">@ViewBag.Title</h4>
+    </div>
+    <div class="col-md-7 align-self-center text-right">
+        <div class="d-flex justify-content-end align-items-center">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="@Url.Action(Actions.Index, Controllers.Home)">Home</a></li>
+                <li class="breadcrumb-item active">Users</li>
+            </ol>
+            @* <button type="button" onclick="GetUserModal(0);" class="btn btn-info d-none d-lg-block m-l-15"><i class="fa fa-plus-circle"></i>&nbsp; Create New</button>*@
+            <button type="button" onclick="Redirect();" class="btn btn-info d-none d-lg-block m-l-15"><i class="fa fa-plus-circle"></i>&nbsp; Create New</button>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="" style="float:right;">
+                    <form class="search-form" id="frmSearch" onsubmit="return ApplySearchFilter(event);">
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="txtSearchString" placeholder="Search" maxlength="50" data-placeholder="Search" autocomplete="off" autofocus>
+                            <div class="input-group-addon"><button class="btn btn-secondary form-control" onclick="return $('#frmSearch').submit(event);"><img src="~/images/search-icon.png" alt=""></button></div>
+                            &nbsp;
+                            <div class="input-group-addon">
+                                <a href="javascript:void(0);" onclick="clearFilter();" class="btn btn-info d-none d-lg-block m-l-15"><i class="fa ti-close"></i></a>
+                            </div>
+                            &nbsp;
+                        </div>
+                    </form>
+                </div>
+                <div class="table-responsive" id="divUserTable">
+                    <table id="tblUser" class="table table-bordered table-striped" width="100%"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    @Scripts.Render("~/bundles/jsDataTableTheme")
+    <script type="text/javascript">
+        $(document).ready(function (readyEvent) {
+            BindTable();
+            var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
+            $('.js-switch').each(function () {
+                new Switchery($(this)[0], $(this).data());
+            });
+        });
+
+        function BindTable() {
+            if ($.fn.DataTable.isDataTable("#tblUser")) {
+                $("#tblUser").dataTable().fnDestroy();
+                $("#divUserTable").html('<table class="table table-bordered table-striped" width="100%" id="tblUser"></table>');
+            }
+            var pages = 1;
+            table = $("#tblUser").DataTable({
+                "processing": true,
+                "serverSide": true,
+                searching: false,
+                "sDom": 'Rfrtlip',
+                "bFilter": false,
+                "pageLength": @ProjectSession.PageSize,
+                "ajax": {
+                    async: true,
+                    url: '@Url.Action(Actions.GetUserData, Controllers.Users)',
+                    type: "post",
+                    data: BuildSearchCriteria()
+                },
+                //"ordering": false,
+                order: [[1, 'asc']],
+                "columns": [
+                    {
+                        "title": "Action",
+                        "data": "UserId",
+                        "render": function (data, type, row) {
+                            var ID = btoa(row["UserId"]);
+                            return '<a href="@Url.Action(Actions.Manage, Controllers.Users)?uid=' + ID + '" title="Edit"><img src="@Url.Content("~/images/ic-edit.png")" alt=""></a>'+
+                                '&nbsp;&nbsp;<a href="javascript:void(0);" onclick="DeleteUser(' + row["UserId"] + ')" title="Delete" ><img alt="" src="@Url.Content("~/images/ic-delete.png")"></a>';
+                        }
+                        , width: '80px'
+                        , "orderable": false
+                        , "class": "action"
+                    },
+                    { "title": "User Name", "data": "UserName", "orderable": true },
+                    { "title": "Type", "data": "UserType", "orderable": true },
+                    {
+                        "title": "Disabled", "data": "IsActive ", "orderable": true,
+                        "render": function (data, type, row) {
+                            if (row["IsActive"]) { return 'No   '; } else { return 'Yes'; }
+                        },
+                    }
+                ],
+                "drawCallback": function (settings) {
+                }
+            });
+        }
+
+        function ApplySearchFilter(e) {
+            e.preventDefault();
+            return BindTable();
+        }
+
+        function BuildSearchCriteria() {
+            var param = {};
+            param["searchString"] = $("#txtSearchString").val();
+            param["__RequestVerificationToken"] = $('input[name=__RequestVerificationToken]').val();
+            return param;
+        }
+
+        function clearFilter() {
+            $("#txtSearchString").val('');
+            BindTable();
+    }
+
+    function DeleteUser(uid) {
+        swal({
+            title: '@Messages.ConfirmTitle',
+            text: '@Messages.DeleteConfirn',
+            type: '@SystemEnum.MessageType.warning.ToString()',
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Yes, delete it!",
+            closeOnConfirm: false
+        }).then((result) => {
+            if (result.value) {
+                $(".preloader").fadeIn();
+                $.ajax({
+                    url: '@Url.Action(Actions.Delete, Controllers.Users)',
+                    type: "POST",
+                    data: { uid: uid },
+                    dataType: "json",
+                    success: function (result) {
+                        $(".preloader").fadeOut();
+                        if (result[0] == 0) {
+                            ShowMessage(result[1], result[2]);
+                        }
+                        else {
+                            ShowMessage(result[1], result[2]);
+                            BindTable();
+                        }
+                    }
+                });
+            }
+        });
+    }
+
+     function Redirect() {
+            window.location = '@Url.Action(Actions.Manage, Controllers.Users, new { Area = BizsoftProjectNetFramework.Web.Class.Areas.NoArea })';
+        }
+    </script>
+}
