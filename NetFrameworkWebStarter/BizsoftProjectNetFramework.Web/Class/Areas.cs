@@ -1,4 +1,4 @@
-﻿namespace BizsoftProjectNetFramework.Web.Class
+﻿namespace NetFrameworkWebStarter.Web.Class
 {
 	public class Areas
     {

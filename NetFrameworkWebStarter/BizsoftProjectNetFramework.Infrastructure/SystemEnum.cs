@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Reflection;
 
-namespace BizsoftProjectNetFramework.Infrastructure
+namespace NetFrameworkWebStarter.Infrastructure
 {
     public class SystemEnum
     {

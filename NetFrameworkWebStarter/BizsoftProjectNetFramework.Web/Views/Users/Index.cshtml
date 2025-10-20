@@ -1,5 +1,5 @@
-﻿@using BizsoftProjectNetFramework.Infrastructure;
-@using BizsoftProjectNetFramework.Web.Class;
+﻿@using NetFrameworkWebStarter.Infrastructure;
+@using NetFrameworkWebStarter.Web.Class;
 @using System.Web.Optimization;
 
 @{
@@ -171,7 +171,7 @@
     }
 
      function Redirect() {
-            window.location = '@Url.Action(Actions.Manage, Controllers.Users, new { Area = BizsoftProjectNetFramework.Web.Class.Areas.NoArea })';
+            window.location = '@Url.Action(Actions.Manage, Controllers.Users, new { Area = NetFrameworkWebStarter.Web.Class.Areas.NoArea })';
         }
     </script>
 }

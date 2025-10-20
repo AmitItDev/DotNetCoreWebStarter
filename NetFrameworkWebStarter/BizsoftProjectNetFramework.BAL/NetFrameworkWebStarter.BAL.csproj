@@ -71,17 +71,17 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BizsoftProjectNetFramework.DAL\BizsoftProjectNetFramework.DAL.csproj">
+    <ProjectReference Include="..\BizsoftProjectNetFramework.DAL\NetFrameworkWebStarter.DAL.csproj">
       <Project>{0C25C80B-98C8-410F-8FF8-F85B94B09E71}</Project>
-      <Name>BizsoftProjectNetFramework.DAL</Name>
+      <Name>NetFrameworkWebStarter.DAL</Name>
     </ProjectReference>
-    <ProjectReference Include="..\BizsoftProjectNetFramework.Infrastructure\BizsoftProjectNetFramework.Infrastructure.csproj">
+    <ProjectReference Include="..\BizsoftProjectNetFramework.Infrastructure\NetFrameworkWebStarter.Infrastructure.csproj">
       <Project>{1D288F8C-4B71-4B04-AEF9-C06C96D673FF}</Project>
-      <Name>BizsoftProjectNetFramework.Infrastructure</Name>
+      <Name>NetFrameworkWebStarter.Infrastructure</Name>
     </ProjectReference>
-    <ProjectReference Include="..\BizsoftProjectNetFramework.Models\BizsoftProjectNetFramework.Models.csproj">
+    <ProjectReference Include="..\BizsoftProjectNetFramework.Models\NetFrameworkWebStarter.Models.csproj">
       <Project>{A09F6CAE-2D2A-4A30-B6EA-65BB82D3670C}</Project>
-      <Name>BizsoftProjectNetFramework.Models</Name>
+      <Name>NetFrameworkWebStarter.Models</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

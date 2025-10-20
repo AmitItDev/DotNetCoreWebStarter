@@ -1,9 +1,9 @@
 ﻿using Microsoft.Owin;
 using Owin;
 
-[assembly: OwinStartupAttribute(typeof(BizsoftProjectNetFramework.Web.Startup))]
+[assembly: OwinStartupAttribute(typeof(NetFrameworkWebStarter.Web.Startup))]
 
-namespace BizsoftProjectNetFramework.Web
+namespace NetFrameworkWebStarter.Web
 {
     public partial class Startup
     {

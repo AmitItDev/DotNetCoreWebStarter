@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Optimization;
 
-namespace BizsoftProjectNetFramework.Web
+namespace NetFrameworkWebStarter.Web
 {
     public class BundleConfig
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace BizsoftProjectNetFramework.Models
+namespace NetFrameworkWebStarter.Models
 {
     public abstract class BaseModel : ICloneable, IDisposable
     {

@@ -1,5 +1,5 @@
-﻿using BizsoftProjectNetFramework.DataProvider;
-using BizsoftProjectNetFramework.Models;
+﻿using NetFrameworkWebStarter.DataProvider;
+using NetFrameworkWebStarter.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BizsoftProjectNetFramework.DAL
+namespace NetFrameworkWebStarter.DAL
 {
     public class ErrorLogRepository : IDisposable
     {

@@ -1,8 +1,8 @@
-﻿using BizsoftProjectNetFramework.DAL;
-using BizsoftProjectNetFramework.Models;
+﻿using NetFrameworkWebStarter.DAL;
+using NetFrameworkWebStarter.Models;
 using System;
 
-namespace BizsoftProjectNetFramework.BAL
+namespace NetFrameworkWebStarter.BAL
 {
     public class SettingManager
     {

@@ -1,4 +1,4 @@
-﻿namespace BizsoftProjectNetFramework.Models
+﻿namespace NetFrameworkWebStarter.Models
 {
     public class CommonSearchModel
     {

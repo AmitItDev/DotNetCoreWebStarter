@@ -1,15 +1,15 @@
 ﻿using Antlr.Runtime.Misc;
-using BizsoftProjectNetFramework.BAL;
-using BizsoftProjectNetFramework.Infrastructure;
-using BizsoftProjectNetFramework.Models;
-using BizsoftProjectNetFramework.Web.Class;
+using NetFrameworkWebStarter.BAL;
+using NetFrameworkWebStarter.Infrastructure;
+using NetFrameworkWebStarter.Models;
+using NetFrameworkWebStarter.Web.Class;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace BizsoftProjectNetFramework.Web.Controllers
+namespace NetFrameworkWebStarter.Web.Controllers
 {
     public class AccountController : Controller
     {

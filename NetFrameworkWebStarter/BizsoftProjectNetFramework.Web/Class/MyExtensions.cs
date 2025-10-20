@@ -1,4 +1,4 @@
-﻿using BizsoftProjectNetFramework.Infrastructure;
+﻿using NetFrameworkWebStarter.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -12,7 +12,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace BizsoftProjectNetFramework.Web.Class
+namespace NetFrameworkWebStarter.Web.Class
 {
     public static class MyExtensions
     {

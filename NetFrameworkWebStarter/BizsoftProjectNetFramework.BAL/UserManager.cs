@@ -1,13 +1,13 @@
-﻿using BizsoftProjectNetFramework.DAL;
-using BizsoftProjectNetFramework.Infrastructure;
-using BizsoftProjectNetFramework.Models;
+﻿using NetFrameworkWebStarter.DAL;
+using NetFrameworkWebStarter.Infrastructure;
+using NetFrameworkWebStarter.Models;
 using DataTables.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 
-namespace BizsoftProjectNetFramework.BAL
+namespace NetFrameworkWebStarter.BAL
 {
     public class UserManager
     {

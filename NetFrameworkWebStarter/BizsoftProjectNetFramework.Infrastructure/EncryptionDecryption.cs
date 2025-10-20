@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace BizsoftProjectNetFramework.Infrastructure
+namespace NetFrameworkWebStarter.Infrastructure
 {
     public class EncryptionDecryption
     {

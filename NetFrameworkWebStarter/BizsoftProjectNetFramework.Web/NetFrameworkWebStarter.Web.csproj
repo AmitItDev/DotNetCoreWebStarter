@@ -782,17 +782,17 @@
     <Content Include="Scripts\jquery-3.7.0.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BizsoftProjectNetFramework.BAL\BizsoftProjectNetFramework.BAL.csproj">
+    <ProjectReference Include="..\BizsoftProjectNetFramework.BAL\NetFrameworkWebStarter.BAL.csproj">
       <Project>{A511523D-981A-4C21-ACB3-0AF1DEA84CB9}</Project>
-      <Name>BizsoftProjectNetFramework.BAL</Name>
+      <Name>NetFrameworkWebStarter.BAL</Name>
     </ProjectReference>
-    <ProjectReference Include="..\BizsoftProjectNetFramework.Infrastructure\BizsoftProjectNetFramework.Infrastructure.csproj">
+    <ProjectReference Include="..\BizsoftProjectNetFramework.Infrastructure\NetFrameworkWebStarter.Infrastructure.csproj">
       <Project>{1D288F8C-4B71-4B04-AEF9-C06C96D673FF}</Project>
-      <Name>BizsoftProjectNetFramework.Infrastructure</Name>
+      <Name>NetFrameworkWebStarter.Infrastructure</Name>
     </ProjectReference>
-    <ProjectReference Include="..\BizsoftProjectNetFramework.Models\BizsoftProjectNetFramework.Models.csproj">
+    <ProjectReference Include="..\BizsoftProjectNetFramework.Models\NetFrameworkWebStarter.Models.csproj">
       <Project>{A09F6CAE-2D2A-4A30-B6EA-65BB82D3670C}</Project>
-      <Name>BizsoftProjectNetFramework.Models</Name>
+      <Name>NetFrameworkWebStarter.Models</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

@@ -1,7 +1,7 @@
-﻿using BizsoftProjectNetFramework.Web.Class;
+﻿using NetFrameworkWebStarter.Web.Class;
 using System.Web.Mvc;
 
-namespace BizsoftProjectNetFramework.Web
+namespace NetFrameworkWebStarter.Web
 {
     public class FilterConfig
     {

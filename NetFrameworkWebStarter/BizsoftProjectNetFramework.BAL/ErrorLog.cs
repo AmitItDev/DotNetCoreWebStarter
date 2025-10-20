@@ -1,6 +1,6 @@
-﻿using BizsoftProjectNetFramework.DAL;
-using BizsoftProjectNetFramework.Infrastructure;
-using BizsoftProjectNetFramework.Models;
+﻿using NetFrameworkWebStarter.DAL;
+using NetFrameworkWebStarter.Infrastructure;
+using NetFrameworkWebStarter.Models;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 
-namespace BizsoftProjectNetFramework.BAL
+namespace NetFrameworkWebStarter.BAL
 {
     public class ErrorLog
     {

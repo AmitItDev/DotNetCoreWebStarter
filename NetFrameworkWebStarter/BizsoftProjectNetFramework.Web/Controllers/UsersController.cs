@@ -1,6 +1,6 @@
-﻿using BizsoftProjectNetFramework.BAL;
-using BizsoftProjectNetFramework.Infrastructure;
-using BizsoftProjectNetFramework.Models;
+﻿using NetFrameworkWebStarter.BAL;
+using NetFrameworkWebStarter.Infrastructure;
+using NetFrameworkWebStarter.Models;
 using DataTables.Mvc;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace BizsoftProjectNetFramework.Web.Controllers
+namespace NetFrameworkWebStarter.Web.Controllers
 {
     public class UsersController : Controller
     {

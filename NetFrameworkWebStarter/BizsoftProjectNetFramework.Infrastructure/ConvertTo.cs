@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BizsoftProjectNetFramework.Infrastructure
+namespace NetFrameworkWebStarter.Infrastructure
 {
     using System;
     using System.Collections.Generic;
@@ -19,7 +19,7 @@ namespace BizsoftProjectNetFramework.Infrastructure
     /// <summary>
     ///  Manage to Convert the Data Type to other Data Type
     /// </summary>
-    /// <CreatedBy>Bizsoft</CreatedBy>
+    /// <CreatedBy>Template</CreatedBy>
     /// <CreatedDate>20-November-2018</CreatedDate>
     /// <ModifiedBy></ModifiedBy>
     /// <ModifiedDate></ModifiedDate>

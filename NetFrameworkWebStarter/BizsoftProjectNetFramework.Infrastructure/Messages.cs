@@ -1,5 +1,5 @@
 ﻿
-namespace BizsoftProjectNetFramework.Infrastructure
+namespace NetFrameworkWebStarter.Infrastructure
 {
     public class Messages
     {

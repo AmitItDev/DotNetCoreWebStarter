@@ -6,7 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 
-namespace BizsoftProjectNetFramework.DataProvider
+namespace NetFrameworkWebStarter.DataProvider
 {
     public class SqlClient
     {

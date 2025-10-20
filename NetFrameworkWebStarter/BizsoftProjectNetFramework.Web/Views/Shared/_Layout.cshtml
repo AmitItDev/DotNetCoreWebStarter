@@ -1,5 +1,5 @@
-﻿@using BizsoftProjectNetFramework.Web.Class;
-@using BizsoftProjectNetFramework.Infrastructure;
+﻿@using NetFrameworkWebStarter.Web.Class;
+@using NetFrameworkWebStarter.Infrastructure;
 @using System.Web.Optimization;
 
 <!DOCTYPE html>
@@ -14,7 +14,7 @@
 
     <link rel="icon" type="image/png" sizes="16x16" href="~/assets/images/favicon.ico">
 
-    <title>@ViewBag.Title - Bizsoft</title>
+    <title>@ViewBag.Title - Template</title>
     <link href="~/assets/node_modules/toast-master/css/jquery.toast.css" rel="stylesheet">
     @(Styles.Render("~/Content/cssTheme"))
     <!-- Custom CSS -->
@@ -38,7 +38,7 @@
     <div class="preloader">
         <div class="loader">
             <div class="loader__figure"></div>
-            <p class="loader__label">Bizsoft</p>
+            <p class="loader__label">Template</p>
         </div>
     </div>
 
@@ -55,13 +55,13 @@
                 <!-- Logo -->
                 <!-- ============================================================== -->
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="@Url.Action(Actions.Index, Controllers.Home, new { Area = BizsoftProjectNetFramework.Web.Class.Areas.NoArea })">
+                    <a class="navbar-brand" href="@Url.Action(Actions.Index, Controllers.Home, new { Area = NetFrameworkWebStarter.Web.Class.Areas.NoArea })">
 
 
                         <!--End Logo icon -->
                         <!-- Logo text --><span style="font-size:x-large; font-weight:bold;padding-left:5px;">
     <!-- dark Logo text -->
-    Bizsoft @(System.Configuration.ConfigurationManager.AppSettings["TestSiteTitle"])
+    Template @(System.Configuration.ConfigurationManager.AppSettings["TestSiteTitle"])
     @*<img src="~/assets/images/New-logo-text.png" height="25" width="135" alt="homepage" class="dark-logo" />*@
     <!-- Light Logo text -->
     @*<img src="~/assets/images/New-logo-text.png" height="25" width="135" class="light-logo" alt="homepage" />*@
